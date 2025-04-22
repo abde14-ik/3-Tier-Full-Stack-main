@@ -1,6 +1,6 @@
 // this file is modificated ver from https://docs.mapbox.com/mapbox-gl-js/example/cluster/ 
 
-mapboxgl.accessToken = mapToken;
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWJkZWwxNjUiLCJhIjoiY205cjJwb2lpMXNpZzJqczd0bTJpb2lrcyJ9.JUWQkNwVeFr3-phvBad4Mw'
 const map = new mapboxgl.Map({
     container: 'cluster-map',
     style: 'mapbox://styles/mapbox/light-v10',
