@@ -1,0 +1,58 @@
+image: maven:3.8.5-jdk-8
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end"
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+before_script:
+  - echo "🚀 Démarrage du job: préparation de l'environnement..."
+
+after_script:
+  - echo "✅ Job terminé: nettoyage ou étapes post-exécution..."
+
+stages:
+  - build
+  - test
+  - package
+  - deploy
+
+build-job:
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS compile
+
+unit-test-job:
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS test
+  artifacts:
+    reports:
+      junit: target/surefire-reports/*.xml
+    paths:
+      - target/surefire-reports
+
+lint-job:
+  stage: test
+  script:
+    - echo "⚙️ Linting Java code (placeholder)"
+    - exit 1
+  allow_failure: true  
+
+package-job:
+  stage: package
+  script:
+    - mvn $MAVEN_CLI_OPTS package
+  artifacts:
+    paths:
+      - target/*.jar
+
+deploy-job:
+  stage: deploy
+  environment: production
+  script:
+    - echo "📦 Déploiement fictif de l'application"
